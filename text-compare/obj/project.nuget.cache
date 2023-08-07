@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "2iYNzrfV/EAp+qaW+MN0Z5iEvwC/Qto5VL0l0tuL5Yr8GCcOCtdUiWYDj0pFEyHzCN0SGFQ5ox81Peq940zKJw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Aditi\\Desktop\\Shivam\\Projects\\text-compare\\text-compare\\text-compare.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Aditi\\.nuget\\packages\\diffplex\\1.7.1\\diffplex.1.7.1.nupkg.sha512",
+    "C:\\Users\\Aditi\\.nuget\\packages\\microsoft.aspnetcore.mvc.versioning\\5.1.0\\microsoft.aspnetcore.mvc.versioning.5.1.0.nupkg.sha512",
+    "C:\\Users\\Aditi\\.nuget\\packages\\microsoft.aspnetcore.mvc.versioning.apiexplorer\\5.1.0\\microsoft.aspnetcore.mvc.versioning.apiexplorer.5.1.0.nupkg.sha512",
+    "C:\\Users\\Aditi\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\Aditi\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Aditi\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
+    "C:\\Users\\Aditi\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
+    "C:\\Users\\Aditi\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
+    "C:\\Users\\Aditi\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
