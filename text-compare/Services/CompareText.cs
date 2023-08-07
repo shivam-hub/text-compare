@@ -3,27 +3,25 @@ using text_compare.Models;
 using static text_compare.Constants.Constants;
 using DiffPlex;
 using DiffPlex.DiffBuilder;
+using System.Text;
 
 namespace text_compare.Services
 {
     public class CompareText : ICompareText
     {
-        public TextComparisonResult CompareAndHighlightChanges(string baseText, string modifiedText)
+        public TextComparisonResult CompareAndHighlightChanges(string baseText, string modifiedText, List<ChangeInfo> changes)
         {
-            var lineChanges = CompareLineByLine(baseText, modifiedText);
-            var wordChanges = CompareWordByWord(baseText, modifiedText);
-            var letterChanges = CompareLetterByLetter(baseText, modifiedText);
-
-            // Aggregate the changes and generate highlighted texts
-            var baseWithHighlights = ApplyHighlights(baseText, lineChanges, wordChanges, letterChanges);
-            var modifiedWithHighlights = ApplyHighlights(modifiedText, lineChanges, wordChanges, letterChanges);
+            var baseWithHighlights = ApplyHighlights(baseText, changes);
+            var modifiedWithHighlights = ApplyHighlights(modifiedText, changes);
 
             return new TextComparisonResult
             {
                 BaseTextWithHighlights = baseWithHighlights,
                 ModifiedTextWithHighlights = modifiedWithHighlights,
-                RemovalCount = lineChanges.Count(c => c.Type == ChangeType.Removal),
-                AdditionCount = lineChanges.Count(c => c.Type == ChangeType.Addition)
+                RemovalCount = 0,
+                //lineChanges.Count(c => c.Type == ChangeType.Removal),
+                AdditionCount = 0
+                //lineChanges.Count(c => c.Type == ChangeType.Addition)
             };
         }
 
@@ -43,12 +41,12 @@ namespace text_compare.Services
             return CompareSequences(baseWords, modifiedWords);
         }
 
-        public List<ChangeInfo> CompareLetterByLetter(string baseText, string modifiedText)
+        public TextComparisonResult CompareLetterByLetter(string baseText, string modifiedText)
         {
             var baseLetters = baseText.ToCharArray();
             var modifiedLetters = modifiedText.ToCharArray();
-
-            return CompareSequences(baseLetters, modifiedLetters);
+            var res = CompareSequences(baseLetters, modifiedLetters);
+            return CompareAndHighlightChanges(baseText, modifiedText, res);
         }
 
         private List<ChangeInfo> CompareSequences<T>(IEnumerable<T> baseSeq, IEnumerable<T> modifiedSeq)
@@ -100,25 +98,56 @@ namespace text_compare.Services
         private string ApplyHighlights(string text, params List<ChangeInfo>[] changeLists)
         {
             var sortedChanges = changeLists.SelectMany(list => list)
-                .OrderBy(change => change.Position)
-                .ToList();
+                                            .OrderBy(change => change.Position)
+                                            .ToList();
 
-            int offset = 0;
+            var highlightedFragments = new List<string>();
+            int currentPosition = 0;
+
             foreach (var change in sortedChanges)
             {
+                string highlightTag;
+                string highlightContent;
+
                 if (change.Type == ChangeType.Removal)
                 {
-                    text = text.Insert(change.Position + offset, $"<span class=\"removed\">{change.BaseValue}</span>");
-                    offset += $"<span class=\"removed\">{change.BaseValue}</span>".Length;
+                    highlightTag = "removed";
+                    highlightContent = change.BaseValue;
                 }
                 else if (change.Type == ChangeType.Addition)
                 {
-                    text = text.Insert(change.Position + offset, $"<span class=\"added\">{change.ModifiedValue}</span>");
-                    offset += $"<span class=\"added\">{change.ModifiedValue}</span>".Length;
+                    highlightTag = "added";
+                    highlightContent = change.ModifiedValue;
                 }
+                else
+                {
+                    continue; // Skip unchanged items
+                }
+
+                var highlightStartTag = $"<span class=\"{highlightTag}\">";
+                var highlightEndTag = "</span>";
+
+                // Append the unchanged text fragment
+                if (change.Position > currentPosition)
+                {
+                    highlightedFragments.Add(text.Substring(currentPosition, change.Position - currentPosition));
+                }
+
+                // Append the highlighted text fragment
+                highlightedFragments.Add($"{highlightStartTag}{highlightContent}{highlightEndTag}");
+
+                currentPosition = change.Position + highlightContent.Length;
             }
 
-            return text;
+            // Append any remaining unchanged text
+            if (currentPosition < text.Length)
+            {
+                highlightedFragments.Add(text.Substring(currentPosition));
+            }
+
+            return string.Concat(highlightedFragments);
         }
+
+
     }
 }
