@@ -4,9 +4,8 @@ namespace text_compare.Models
 {
     public class ChangeInfo
     {
-        public ChangeType Type { get; set; }
+        public TextChangeType Type { get; set; }
+        public string Element { get; set; }
         public int Position { get; set; }
-        public string BaseValue { get; set; }
-        public string ModifiedValue { get; set; }
     }
 }

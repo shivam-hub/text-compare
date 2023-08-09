@@ -2,15 +2,11 @@
 {
     public static class Constants
     {
-        public enum ChangeType
+        public enum TextChangeType
         {
             None,
             Addition,
             Removal,
-            Modification,
-            Unchanged,
-            Inserted,
-            Deleted
         }
     }
 }

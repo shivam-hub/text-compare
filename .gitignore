@@ -1,0 +1,78 @@
+# ASP.NET temporary files
+obj/
+bin/
+
+# User-specific files
+*.user
+*.suo
+*.userprefs
+*.vscode/
+.vs/
+
+# Compiled files
+*.dll
+*.exe
+*.pdb
+
+# NuGet Packages
+*.nuget.props
+*.paket.props
+*.paket.targets
+packages/
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Visual Studio Code directory
+.vscode/
+
+# Visual Studio files
+.vscode/
+*.sln
+*.suo
+*.user
+*.userprefs
+*.vscode/
+
+# Rider files
+.idea/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VS Code folders
+.vscode/
+
+# .NET Scaffolding
+ScaffoldingReadMe.txt
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+
+*.vsidx

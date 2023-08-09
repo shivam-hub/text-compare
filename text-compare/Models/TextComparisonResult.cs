@@ -2,9 +2,8 @@
 {
     public class TextComparisonResult
     {
-        public string BaseTextWithHighlights { get; set; }
-        public string ModifiedTextWithHighlights { get; set; }
-        public int RemovalCount { get; set; }
-        public int AdditionCount { get; set; }
+        public int AddedCount { get; set; }
+        public int RemovedCount { get; set; }
+        public List<ChangeInfo> Changes { get; set; }
     }
 }
